@@ -55,6 +55,10 @@ class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun updateMap(location: Location) {
+
+
+
+        
         val userLocation = LatLng(location.latitude, location.longitude)
         mMap.clear()
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f))
