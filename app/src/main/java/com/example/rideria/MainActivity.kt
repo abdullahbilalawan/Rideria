@@ -34,7 +34,8 @@ class MainActivity : AppCompatActivity() {
 
             val intent  = Intent(applicationContext,InfoActivity::class.java)
 
-            intent.putExtra("id",name)
+            intent.putExtra("id","driver"+name)
+            intent.putExtra("type","driver")
             startActivity(intent)
 
 
@@ -50,7 +51,8 @@ class MainActivity : AppCompatActivity() {
 
             val intent  = Intent(applicationContext,InfoActivity::class.java)
 
-            intent.putExtra("id",name)
+            intent.putExtra("id","Rider"+name)
+            intent.putExtra("type","Rider")
             startActivity(intent)
 
 
