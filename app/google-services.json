@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "219950220829",
+    "firebase_url": "https://instagram-application-5d532.firebaseio.com",
+    "project_id": "instagram-application-5d532",
+    "storage_bucket": "instagram-application-5d532.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219950220829:android:130682727d025eb386e8f4",
+        "android_client_info": {
+          "package_name": "com.example.rideria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219950220829-7fkbkpies9trl8epcol17mcq674oa9fv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf1SQ95a4Eb64ZncD39GMR-Z3cKFRZ2Wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219950220829-7fkbkpies9trl8epcol17mcq674oa9fv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
