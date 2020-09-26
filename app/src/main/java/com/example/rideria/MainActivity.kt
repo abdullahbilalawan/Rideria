@@ -11,7 +11,17 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
      var usertypeswitch: Switch? = null
-     val name = UUID.randomUUID().toString()
+
+
+
+    fun getRandomString(length: Int) : String {
+        val allowedChars = ('A'..'Z') + ('a'..'z')
+        return (1..length)
+            .map { allowedChars.random() }
+            .joinToString("")
+    }
+
+     val name = getRandomString(5)
 
 
 

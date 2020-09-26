@@ -52,6 +52,8 @@ class InfoActivity : AppCompatActivity() {
 
             val intent = Intent(applicationContext,RiderActivity::class.java)
 
+            intent.putExtra("id",id )
+
             startActivity(intent)
 
         }

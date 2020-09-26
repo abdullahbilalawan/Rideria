@@ -2,12 +2,16 @@ package com.example.rideria
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -17,6 +21,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_rider.*
 
 
 class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -25,6 +31,79 @@ class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
 
     var locationManager: LocationManager? = null
     var locationListener: LocationListener? = null
+
+
+
+    fun logout(view: View){
+
+        val intent = Intent(applicationContext,MainActivity::class.java)
+
+        startActivity(intent)
+
+
+
+
+    }
+
+
+
+
+    fun call(view: View){
+
+
+
+
+        // when ride booking button is clicked
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            locationManager?.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                0,
+                0.1f,
+                locationListener
+            )
+            val lastKnownLocation =
+                locationManager?.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+
+
+
+            if (lastKnownLocation != null) {
+                var id = intent.getStringExtra("id")
+
+                val latLng = LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
+
+                FirebaseDatabase.getInstance().getReference().child("Users").child(id)
+                    .child("location").setValue(latLng)
+                Toast.makeText(applicationContext, "Calling ur Rider", Toast.LENGTH_LONG).show()
+            } else {
+
+                Toast.makeText(
+                    applicationContext,
+                    "COuld not find your location",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+
+            b.setText("CANCEL RIDE")
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 
     override fun onRequestPermissionsResult(
@@ -58,7 +137,7 @@ class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-        
+
         val userLocation = LatLng(location.latitude, location.longitude)
         mMap.clear()
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 15f))
@@ -68,6 +147,23 @@ class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        setTitle("Riders Map and Location")
+
+
+
+//        val button: Button = findViewById(R.id.b)
+//        if(button.text.equals("CANCEL RIDE")){
+//            var id = intent.getStringExtra("id")
+//
+//
+//            FirebaseDatabase.getInstance().getReference().child("Users").child(id).child("location").removeValue()
+//
+//            Toast.makeText(applicationContext,"Cancelling and removing request",Toast.LENGTH_LONG).show()
+//        }
+
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rider)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
