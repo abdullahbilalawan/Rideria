@@ -40,6 +40,7 @@ class InfoActivity : AppCompatActivity() {
             nametext?.text.toString())
 
 
+
         FirebaseDatabase.getInstance().getReference().child("Users").child(id).child("PhoneNo").setValue(
             phoneno?.text.toString())
 
@@ -57,6 +58,16 @@ class InfoActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+        if(intent.getStringExtra("type").equals("driver")){
+
+            val intent = Intent(applicationContext,ViewRequestsActivity::class.java)
+
+            intent.putExtra("id",id )
+
+            startActivity(intent)
+
+        }
+
 
     }
 

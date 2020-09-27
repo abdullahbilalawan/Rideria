@@ -10,7 +10,6 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -71,10 +70,13 @@ class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
             if (lastKnownLocation != null) {
                 var id = intent.getStringExtra("id")
 
-                val latLng = LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
+              val latLng = LatLng(lastKnownLocation.latitude, lastKnownLocation.longitude)
 
                 FirebaseDatabase.getInstance().getReference().child("Users").child(id)
-                    .child("location").setValue(latLng)
+                    .child("latitude").setValue(latLng.latitude)
+
+                FirebaseDatabase.getInstance().getReference().child("Users").child(id)
+                    .child("longitude").setValue(latLng.longitude)
                 Toast.makeText(applicationContext, "Calling ur Rider", Toast.LENGTH_LONG).show()
             } else {
 
@@ -168,7 +170,7 @@ class RiderActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_rider)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+            .findFragmentById(R.id.layout) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
